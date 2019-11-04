@@ -3,9 +3,17 @@ const rl = require('readline');
 const getTrainLines = require('./utils/get-lines');
 const getStopsOnLine = require('./utils/get-stops-on-line');
 
+function printStops (stops) {
+    return stops.map(
+        ({id, name, furthestStop, coordinates}) =>
+            `${name} (${id}): ${coordinates.join('/')} ➡ ${furthestStop.name}`
+    )
+    .join('\n');
+}
 async function handleTransitLine (line) {
   const stops = await getStopsOnLine(line);
-  console.log(`Found ${stops.length} stops`, stops);
+  console.log(`Found ${stops.length} stops\n`, printStops(stops));
+  process.exit();
 }
 
 async function main () {

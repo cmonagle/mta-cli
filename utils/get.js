@@ -23,6 +23,7 @@ module.exports = url => new Promise((resolve, reject) => {
     }
     let data;
     res.on('data', chunk => {
+      console.log('.');
       data += chunk;
     });
 
