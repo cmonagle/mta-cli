@@ -5,7 +5,7 @@ const getProtocolMethod = url => url.charAt(4) === 's' ? https : http;
 /**
  * For some reason, the response seems to include "undefined" at the beginning
  * also, it's double json encoded some of the time, so we're just gonna keep
- * json parsing it until it's not a string
+ * JSON parsing it until it's not a string
  */
 
 function normaliseAndParseResponse (response) {
@@ -23,7 +23,6 @@ module.exports = url => new Promise((resolve, reject) => {
     }
     let data;
     res.on('data', chunk => {
-      console.log('.');
       data += chunk;
     });
 
