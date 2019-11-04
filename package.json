@@ -1,0 +1,15 @@
+{
+  "name": "transit-test",
+  "version": "0.0.1",
+  "description": "Parsing MTA trip data",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "lint": "semistandard"
+  },
+  "author": "cmonagle",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "semistandard": "^14.2.0"
+  }
+}
