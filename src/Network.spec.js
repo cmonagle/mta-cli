@@ -5,7 +5,6 @@ const resultsFixture = JSON.parse('[{"lineImage":"img/1.png","id":"1"},{"lineIma
 function mockGet (resolves, expectation) {
   return function (...params) {
     return new Promise(resolve => {
-      console.log(params);
       expectation.result = expectation.test(...params);
       resolve(resolves);
     });

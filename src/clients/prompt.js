@@ -5,8 +5,8 @@ const readLine = rl.createInterface({
   output: process.stdout
 });
 /**
- *
  * @param {string} questionText
+ * @returns {Promise<string>}
  */
 const prompt = (questionText) => new Promise(resolve => {
   readLine.question(
