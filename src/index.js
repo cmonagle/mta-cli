@@ -12,7 +12,6 @@ async function main () {
   console.log(`Stops on line ${line.name}`);
   console.log(showStops(stops));
   process.exit();
-
 }
 
 main();

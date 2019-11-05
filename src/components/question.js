@@ -1,8 +1,8 @@
 const { prompt: defaultPrompt } = require('../clients/prompt');
 /**
  *
- * @param {Network} network - the transit network
- * @param {function} lineSelectedHandler - handler/cb with response
+ * @param {import('../Network').Network} network - the transit network
+ * @param {function} prompt - handler/cb with response
 
  * @returns {Promise<string>}
  */

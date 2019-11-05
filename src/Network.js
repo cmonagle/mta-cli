@@ -6,13 +6,14 @@ const { LINES_ENDPOINT } = require('./constants');
  * @property {string[]} lines - list of lines
 
  * @param {function} get - HTTP get client
- * @returns {Network}
+ * @returns {Promise<Network>}
  */
 
 async function getNetwork (get = getRequest) {
   const results = await get(LINES_ENDPOINT);
   return {
     name: 'MTA Subways',
+    // @ts-ignore
     lines: results.map(line => line.id)
   };
 }

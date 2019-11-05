@@ -1,5 +1,10 @@
 const rl = require('readline');
 const fs = require('fs');
+/**
+ *
+ * @param {string} file
+ * @param {(arg0: string) => void} lineReader
+ */
 async function fileStreamer (
   file,
   lineReader

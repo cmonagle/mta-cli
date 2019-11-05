@@ -1,9 +1,12 @@
 const { distance: calculateDistance } = require('./utils/geo');
 const { fileStreamer: defaultFileStreamer } = require('./clients/io');
+const { STOPS_FILE_LOC } = require('./constants');
+const path = require('path');
 /**
  *
+ * @param {StopData} stop
  * @param {StopData[]} stops
- * @returns {StopData[]}
+ * @returns {FurthestStop}
  */
 function findFurthestStop (stop, stops) {
   return stops.reduce((furthest, stopToCompare) => {
@@ -20,7 +23,7 @@ function findFurthestStop (stop, stops) {
 
 /**
  * @typedef {Object} StopData
- * @property {number} id - id number
+ * @property {string} id - id number
  * @property {string} name - stop name
  * @property {number[]} coordinates - x, y coordinates of stop
  * @property {FurthestStop} furthestStop - name of further stop
@@ -39,10 +42,11 @@ function lineParser (line) {
     x,
     y
   ] = line.split(',');
+
   return {
     name,
     id,
-    coordinates: [x, y],
+    coordinates: [x, y].map(Number),
     furthestStop: {
       name: '',
       distance: 0
@@ -52,31 +56,34 @@ function lineParser (line) {
 /**
  * note line here means the file line, not the transit line
  * @typedef {Object} LineHandler
- * @property {function} lineReader - function to process lines
+ * @property {(arg0: string) => void} lineReader - function to process lines
  * @property {StopData[]} stops - transformed stop data
  *
  * @param {string[]} stopIds
  * @returns {LineHandler}
  */
 function lineHandler (stopIds) {
+  /** @type {StopData[]} */
   const stops = [];
-  const lineReader = function (line) {
-    const stopToCompare = lineParser(line);
-
-    stopIds.forEach((id, i) => {
-      if (stopToCompare.id === id) {
-        stops.push(stopToCompare);
-        stopIds.splice(i, 1);
-      }
-    });
-  };
+  const lineReader = /**
+   * @param {string} line
+   */
+ function (line) {
+   const stopToCompare = lineParser(line);
+   stopIds.forEach((id, i) => {
+     if (stopToCompare.id === id) {
+       stops.push(stopToCompare);
+       stopIds.splice(i, 1);
+     }
+   });
+ };
 
   return { lineReader, stops };
 }
 
 /**
  *
- * @param {Line} line
+ * @param {import('./Line').Line} line
  * @returns {Promise<StopData[]>}
  */
 
@@ -85,7 +92,7 @@ async function getStops (line, fileStreamer = defaultFileStreamer) {
     stops,
     lineReader
   } = lineHandler(line.stops);
-  await fileStreamer(`${__dirname}/${STOPS_FILE_LOC}`, lineReader);
+  await fileStreamer(path.join(__dirname, STOPS_FILE_LOC), lineReader);
 
   return stops.map(stop => {
     stop.furthestStop = findFurthestStop(stop, stops);

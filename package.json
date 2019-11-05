@@ -5,13 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./src/**/**.spec.js",
-    "lint": "semistandard"
+    "typecheck": "tsc",
+    "stylelint": "semistandard ./src",
+    "lint": "typecheck && stylelint"
+  },
+  "semistandard": {
+    "env": [ "mocha" ]
   },
   "author": "cmonagle",
   "license": "UNLICENSED",
   "devDependencies": {
+    "@types/node": "^12.12.5",
     "chai": "^4.2.0",
     "mocha": "^6.2.2",
-    "semistandard": "^14.2.0"
+    "semistandard": "^14.2.0",
+    "typescript": "^3.6.4"
   }
 }

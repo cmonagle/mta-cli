@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "allowJs": true,
+        "noEmit": true,
+        "checkJs": true
+    },
+    "include": [
+        "src/*.js",
+        "src/**/*.js"
+    ],
+    "exclude": [
+        "node_modules",
+        "src/**/*.spec.ts",
+        "src/*.spec.js"
+    ]
+}
