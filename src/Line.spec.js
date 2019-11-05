@@ -22,7 +22,6 @@ describe('Line', function () {
 
     expect(line.name).to.eql('1');
     expect(line.stops.length).to.eql(38);
-    expect(line.stops.every(val => typeof val === 'number')).to.be.true;
     expect(expectation.result).to.be.true;
   });
 });
