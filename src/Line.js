@@ -1,3 +1,5 @@
+const { STATIONS_ENDPOINT } = require('./constants');
+
 const getRequest = require('./clients/http');
 
 /**
@@ -20,7 +22,7 @@ function flatten (boroughs) {
  * @returns {Promise<Line>} - array of stops on this line
  */
 async function getLines (line, get = getRequest) {
-  const results = await get(`http://traintimelb-367443097.us-east-1.elb.amazonaws.com/getStationsByLine/${line}`);
+  const results = await get(`${STATIONS_ENDPOINT}/${line}`);
 
   return {
     name: line,

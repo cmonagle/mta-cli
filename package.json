@@ -4,6 +4,7 @@
   "description": "Parsing MTA trip data",
   "main": "index.js",
   "scripts": {
+    "start": "node ./src/index.js",
     "test": "mocha ./src/**/**.spec.js",
     "typecheck": "tsc",
     "stylelint": "semistandard ./src",
@@ -15,10 +16,10 @@
   "author": "cmonagle",
   "license": "UNLICENSED",
   "devDependencies": {
-    "@types/node": "^12.12.5",
-    "chai": "^4.2.0",
-    "mocha": "^6.2.2",
-    "semistandard": "^14.2.0",
-    "typescript": "^3.6.4"
+    "@types/node": "12.12.5",
+    "chai": "4.2.0",
+    "mocha": "6.2.2",
+    "semistandard": "14.2.0",
+    "typescript": "3.6.4"
   }
 }
