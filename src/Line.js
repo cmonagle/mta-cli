@@ -20,7 +20,7 @@ async function getLines (line, get = getRequest) {
 
   return {
     name: line,
-    stops: flatten(results).map(stop => stop.id)
+    stops: flatten(results).map(stop => Number(stop.id))
   };
 }
 
